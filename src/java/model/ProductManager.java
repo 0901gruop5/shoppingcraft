@@ -26,7 +26,7 @@ public class ProductManager {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String dbUser = "sa";
             String dbPassword = "123456";
-            String url = "jdbc:sqlserver://SONNGUYEN\\SQLEXPRESS:1433;databaseName=ProductManager";
+            String url = "jdbc:sqlserver://ADMIN:1433;databaseName=ShoppingPJ";
             Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
             PreparedStatement ps = conn.prepareStatement("Select* from Products");
             rs = ps.executeQuery();

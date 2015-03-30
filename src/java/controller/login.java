@@ -34,21 +34,23 @@ public class login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         UserManager um = new UserManager();
-        if (um.checkUser(username, password)) {
+        if (um.checkUser(username, password)) {        
             ProductManager pm = new ProductManager();
             proList = pm.ListAll();
             request.setAttribute("proList", proList);
             request.setAttribute("username", username);
             request.getRequestDispatcher("welcome.jsp").forward(request, response);
+            return true;
         } else {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
+        return false;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

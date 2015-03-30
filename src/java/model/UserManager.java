@@ -25,13 +25,15 @@ public class UserManager {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String dbUser = "sa";
             String dbPassword = "123456";
-            String url = "jdbc:sqlserver://SONNGUYEN\\SQLEXPRESS:1433;databaseName=ProductManager";
+            String url = "jdbc:sqlserver://ADMIN:1433;databaseName=ShoppingPJ";
             Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
             PreparedStatement ps = conn.prepareStatement("Select * from [User] where username = ? and password = ?");
             ps.setString(1, user);
             ps.setString(2, pass);
             ResultSet rs = ps.executeQuery();
-            status = rs.next();            
+            if(rs.next()){
+                return true;
+            }      
         } catch (Exception e) {
             e.printStackTrace();
         }
